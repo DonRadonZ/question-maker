@@ -1,5 +1,6 @@
+// Library
 import { createContext, useContext, type ReactNode } from "react";
-import styled from "styled-components";
+import styled from "styled-components"
 
 
 const StyledTable = styled.div`
@@ -22,10 +23,10 @@ const CommonRow = styled.div<CommonRowProps>`
     column-gap: 2.4rem;
     align-items: center;
     transition: none;
-`
+`;
 
 const StyledHeader = styled(CommonRow)`
-    padding: 1.6remm 2.4rem;
+    padding: 1.6rem 2.4rem;
     background-color: var(--color-brand-400);
     border-bottom: 1px solid var(--color-gray-100);
     text-transform: uppercase;
@@ -53,55 +54,55 @@ const Footer = styled.footer`
     justify-content: center;
     padding: 1.2rem;
 
+    /* This will hide the footer when it contains no child elements. Possible thanks to the parent selector :has 🎉 */
     &:not(:has(*)){
         display: none;
     }
-`;
+`
 
 const Empty = styled.p`
     font-size: 1.6rem;
     font-weight: 500;
     text-align: center;
     margin: 2.4rem;
-`;
+`
 
 type TableContextProps = {
     columns: string;
 }
 
-const TableContext = createContext<TableContextProps>({
-    columns: ""
-});
+const TableContext = createContext<TableContextProps>({columns: ""});
 
 interface ITable {
     columns: string;
     children: ReactNode;
 }
 
-export function Table({ columns, children }: ITable) {
-    return (
-        <TableContext.Provider value={{columns}}>
-            <StyledTable role="table">{children}</StyledTable>
-        </TableContext.Provider>
-    )
+export function Table({columns, children}: ITable) {
+  return (
+    <TableContext.Provider value={{columns}}>
+      <StyledTable role="table">{children}</StyledTable>
+    </TableContext.Provider>
+  )
 }
 
 interface ChildrenProps {
     children: ReactNode;
 }
 
-export function Header({ children }: ChildrenProps) {
-    const { columns } = useContext(TableContext);
-    return (
+export function Header({children}: ChildrenProps){
+    const { columns } = useContext(TableContext)
+
+    return(
         <StyledHeader role="row" columns={columns} as="header">
             {children}
         </StyledHeader>
     )
 };
 
-function Row({ children }: ChildrenProps) {
-    const { columns } = useContext(TableContext);
-    return (
+function Row({children}: ChildrenProps){
+    const {columns} = useContext(TableContext);
+    return(
         <StyledRow role="row" columns={columns}>
             {children}
         </StyledRow>
@@ -109,10 +110,10 @@ function Row({ children }: ChildrenProps) {
 };
 
 type TableBodyProps = {
-    data: string[];
+    data: any;
     message ?: string
     render: (tableData: any, index?: any) => any;
-    index?: number;
+    index?: any;
 
 }
 

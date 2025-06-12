@@ -29,7 +29,13 @@ type FormValues = {
 function Question() {
   const { control, register, handleSubmit} = useForm<FormValues>({
         defaultValues: {
-            catalogs: []
+            catalogs: [{
+                title: '',
+                subCatalogs: [{
+                    title: '',
+                    questions: []
+                }]
+            }]
         }
     });
   const moveback = useMoveBack();

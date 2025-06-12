@@ -2,12 +2,30 @@ import Input from '../../../../shared/components/form/Input';
 import ButtonIcon from '../../../../shared/components/ui/ButtonIcon';
 import { HiMinus, HiPlus } from 'react-icons/hi2';
 import { useFieldArray } from 'react-hook-form';
+import styled from 'styled-components';
+import Checkbox from '../../../../shared/components/ui/Checkbox';
+import ButtonGroup from '../../../../shared/components/ui/ButtonGroup';
+import CatalogButton from '../ui/CatalogButton';
 
 type SubCatalogsProps = {
     nestedIndex: number;
     control: any;
     register: any;
 }
+const StyledQuestionSubCatalogs = styled.div`
+    display: grid;
+    grid-template-columns: 24rem 1fr 1.2fr;
+    justify-content: space-between;
+    padding: 1.2rem 1.6rem;
+    background-color: var(--color-gray-100);
+    border-radius: 0.5rem;
+    align-items: center;
+`;
+
+const EvaluationCount = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;`;
 
 function SubCatalogs({ nestedIndex, control, register }: SubCatalogsProps) {
   const { fields: subCatalogFields, append: appendSubCatalog, remove: removeSubCatalog } = useFieldArray({
@@ -18,13 +36,19 @@ function SubCatalogs({ nestedIndex, control, register }: SubCatalogsProps) {
   return (
     <>
       {subCatalogFields.map((subCatalog, index) => (
-        <div key={subCatalog.id}>
-          <label>SubCatalog {index + 1}</label>
-          <Input {...register(`catalogs.${nestedIndex}.subCatalogs.${index}.title`)} placeholder="SubCatalog Title" />
-          {index > 0 ? <ButtonIcon onClick={() => removeSubCatalog(index)}><HiMinus/></ButtonIcon> : null}
-        </div>
+        <StyledQuestionSubCatalogs key={subCatalog.id}>
+            <EvaluationCount>
+                <Checkbox/>
+                <label>{`คำถาม ${index + 1}`}</label>
+            </EvaluationCount>
+          <Input {...register(`catalogs.${nestedIndex}.subCatalogs.${index}.title`)} placeholder="คำถาม" />
+          <ButtonGroup>
+                    {index > 0 ?<ButtonIcon onClick={() => removeSubCatalog(index)}><HiMinus/></ButtonIcon> : null}
+                
+                </ButtonGroup>
+        </StyledQuestionSubCatalogs>
       ))}
-      <ButtonIcon onClick={() => appendSubCatalog({ title: '', questions: [] })}><HiPlus/></ButtonIcon>
+      <CatalogButton onClick={() => appendSubCatalog({ title: '', questions: [] })} variation='secondary' size='medium'><HiPlus/> เพิ่มคำถาม</CatalogButton>
     </>
   )
 }

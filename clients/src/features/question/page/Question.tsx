@@ -8,6 +8,7 @@ import { useMoveBack } from '../../../shared/hooks/useMoveback'
 import { useForm } from 'react-hook-form'
 import CreateQuestionForm from '../components/form/CreateQuestionForm'
 import Button from '../../../shared/components/ui/Button'
+import ButtonGroup from '../../../shared/components/ui/ButtonGroup'
 
 const Title = styled.div`
   font-size: 1.5rem;
@@ -38,26 +39,30 @@ function Question() {
             }]
         }
     });
-  const moveback = useMoveBack();
+    const moveback = useMoveBack();
 
-  function onSubmit(data: FormValues) {
+    function onSubmit(data: FormValues) {
         console.log('Submitted Data:', data);
     }
 
-  return (
-    <>
-    <Row type="horizontal">
-        <Title>
-            <ButtonIcon onClick={moveback}>
-                <HiArrowLeft/>
-            </ButtonIcon>
-           <h1>คำถาม</h1> 
-        </Title>
-        <Button onClick={handleSubmit(onSubmit)} variation='primary' size='medium'>Submit</Button>
-    </Row>
-    <CreateQuestionForm control={control} register={register}/>
-    </>
-  )
+    return (
+        <>
+            <Row type="horizontal">
+                <Title>
+                    <ButtonIcon onClick={moveback}>
+                        <HiArrowLeft />
+                    </ButtonIcon>
+                    <h1>สร้าง/แก้ไขแบบประเมิน</h1> 
+                </Title>
+                <ButtonGroup>
+                <Button onClick={handleSubmit(onSubmit)} variation='danger' size='medium'>ยกเลิกใช้งาน</Button>
+                    <Button onClick={handleSubmit(onSubmit)} variation='primary' size='medium'>บันทึก</Button>
+                </ButtonGroup>
+                
+            </Row>
+            <CreateQuestionForm control={control} register={register} />
+        </>
+    )
 }
 
 export default Question

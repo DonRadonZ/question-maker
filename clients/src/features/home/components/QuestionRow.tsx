@@ -7,11 +7,12 @@ const Qcode = styled.div`
 `
 
 function QuestionRow({question}: any) {
-    const { qcode, qnamet } = question;
+    const { qcode, qnamet, qnamee } = question;
   return (
     <Table.Row>
         <Qcode>{qcode}</Qcode>
-        <Qcode>{qnamet}</Qcode>
+      <Qcode>{qnamet}</Qcode>
+      <Qcode>{qnamee}</Qcode>
     </Table.Row>
   )
 }

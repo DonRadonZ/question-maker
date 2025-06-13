@@ -37,18 +37,34 @@ function SubCatalogs({ nestedIndex, control, register }: SubCatalogsProps) {
     <>
       {subCatalogFields.map((subCatalog, index) => (
         <StyledQuestionSubCatalogs key={subCatalog.id}>
-            <EvaluationCount>
-                <Checkbox/>
-                <label>{`คำถาม ${index + 1}`}</label>
+          <EvaluationCount>
+            
+            
+                <label>{`ข้อที่ ${index + 1}`}</label>
             </EvaluationCount>
-          <Input {...register(`catalogs.${nestedIndex}.subCatalogs.${index}.title`)} placeholder="คำถาม" />
+          <Input {...register(`catalogs.${nestedIndex}.subCatalogs.${index}.title`)} placeholder="คำถาม (ไทย)" />
+          <Input {...register(`catalogs.${nestedIndex}.subCatalogs.${index}.title`)} placeholder="คำถาม (อังกฤษ)" />
+          <EvaluationCount>
+          <label>คิดคะแนน</label>
+          <Checkbox />
+          </EvaluationCount>
+          <EvaluationCount>
+          <label>ค่าน้ำหนัก</label>
+            <select>
+              <option value={1.00}>1.00</option>
+              <option value={1.00}>1.50</option>
+              <option value={2.00}>2.00</option>
+              
+          </select>
+          </EvaluationCount>
           <ButtonGroup>
                     {index > 0 ?<ButtonIcon onClick={() => removeSubCatalog(index)}><HiMinus/></ButtonIcon> : null}
                 
-                </ButtonGroup>
+          </ButtonGroup>
+          
         </StyledQuestionSubCatalogs>
       ))}
-      <CatalogButton onClick={() => appendSubCatalog({ title: '', questions: [] })} variation='secondary' size='medium'><HiPlus/> เพิ่มคำถาม</CatalogButton>
+      <CatalogButton onClick={() => appendSubCatalog({ title: '', questions: [] })} variation='secondary' size='medium'><HiPlus/> เพิ่มข้อคำถาม</CatalogButton>
     </>
   )
 }

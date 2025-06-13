@@ -15,7 +15,7 @@ function Home() {
         <>
         <Row type="horizontal">
         <h1>Welcome Test User</h1>
-        <Button variation="primary" size="medium" onClick={handleCreateQuestion}>สร้างคำถามใหม่</Button>
+        <Button variation="primary" size="medium" onClick={handleCreateQuestion}>สร้างแบบประเมินใหม่</Button>
         </Row>
         <QuestionTable/>
         </>

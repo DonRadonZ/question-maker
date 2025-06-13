@@ -1,13 +1,21 @@
-import { useFieldArray } from 'react-hook-form';
-import ButtonIcon from '../../../../shared/components/ui/ButtonIcon'
-import { HiMinus, HiPlus } from 'react-icons/hi2';
+// Library
+// import { useState } from 'react';
 import styled from 'styled-components';
+import { HiMinus, HiPlus } from 'react-icons/hi2';
+import { useFieldArray } from 'react-hook-form';
+
+// Shared Components
+import ButtonIcon from '../../../../shared/components/ui/ButtonIcon'
 import Input from '../../../../shared/components/form/Input';
-import SubCatalogs from './SubCatalogs';
-import { useState } from 'react';
 import ButtonGroup from '../../../../shared/components/ui/ButtonGroup';
 
+import SubCatalogs from './SubCatalogs';
 import CatalogButton from '../ui/CatalogButton';
+
+
+
+
+
 
 
 
@@ -42,7 +50,7 @@ const StyledQuestionCatalogs = styled.div`
 
 
 function CatalogQuestionForm({control, register }: any) {
-    const [dropdownOpen, setDropdownOpen] = useState(true);
+    // const [dropdownOpen, setDropdownOpen] = useState(true);
 
 
     const {
@@ -57,29 +65,28 @@ function CatalogQuestionForm({control, register }: any) {
     
     
 
-  return (
-    <StyledCatalogs>
-        <CatalogButton onClick={() => appendCatalog({ title: '', subCatalogs: [] })} variation='primary' size='large' ><HiPlus/> เพิ่มหัวข้อ</CatalogButton>
-        {catalogFields.map((catalog, index) => (
-            <>
-            <StyledQuestionCatalogs key={catalog.id}>
-                <label>{`หัวข้อ ${index + 1}`}</label>
-                <Input {...register(`catalogs.${index}.title`)} placeholder="หัวข้อ" />
-                <ButtonGroup>
-                    {index > 0 ?<ButtonIcon onClick={() => removeCatalog(index)}><HiMinus/></ButtonIcon> : null}
-                <ButtonIcon onClick={() => setDropdownOpen(!dropdownOpen)}>{dropdownOpen ? 'Hide' : 'Show'}</ButtonIcon>
-                </ButtonGroup>
-                
-            </StyledQuestionCatalogs>
-            <SubCatalogs
-                nestedIndex={index}
-                {...{control, register}}
-            />
-            </>
-        ))}
-        
-    </StyledCatalogs>
-  )
-}
+    return (
+        <StyledCatalogs>
+            <CatalogButton onClick={() => appendCatalog({ title: '', subCatalogs: [] })} variation='primary' size='large' ><HiPlus /> เพิ่มหมวดคำถาม</CatalogButton>
+            {catalogFields.map((catalog, index) => (
+                <>
+                    <StyledQuestionCatalogs key={catalog.id}>
+                        <label>{`หมวดที่ ${index + 1}`}</label>
+                        <Input {...register(`catalogs.${index}.titleth`)} placeholder="ชื่อหมวด (ไทย)" />
+                        <Input {...register(`catalogs.${index}.titleen`)} placeholder="ชื่อหมวด (อังกฤษ)" />
+                        <ButtonGroup>
+                            {index > 0 ? <ButtonIcon onClick={() => removeCatalog(index)}><HiMinus /></ButtonIcon> : null}
+                            {/* <ButtonIcon onClick={() => setDropdownOpen(!dropdownOpen)}>{dropdownOpen ? 'Hide' : 'Show'}</ButtonIcon> */}
+                        </ButtonGroup>
+                    </StyledQuestionCatalogs>
+                    <SubCatalogs
+                        nestedIndex={index}
+                        {...{ control, register }}
+                    />
+                </>
+            ))}
+        </StyledCatalogs>
+    )
+};
 
 export default CatalogQuestionForm

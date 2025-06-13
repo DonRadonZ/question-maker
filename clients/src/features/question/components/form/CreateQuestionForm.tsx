@@ -8,11 +8,14 @@ function CreateQuestionForm({control, register }: any) {
   return (
     <>
     <Box >
-        <BoxRow label='รหัสคำถาม'>
-            <Input type="text" id="qname" name="qname" placeholder="Enter question name" />
+        <BoxRow label='รหัสแบบประเมิน'>
+            <Input type="text" id="qname" name="qname" placeholder="รหัสแบบประเมิน" />
         </BoxRow>
-        <BoxRow label='ชื่อคำถาม'>
-            <Input type="text" id="qnamet" name="qnamet" placeholder="Enter question name in Thai" />
+        <BoxRow label='ชื่อแบบประเมิน (ไทย)'>
+            <Input type="text" id="qnamet" name="qnamet" placeholder="ชื่อแบบประเมิน (ไทย)" />
+        </BoxRow>
+        <BoxRow label='ชื่อแบบประเมิน (อังกฤษ)'>
+            <Input type="text" id="qnamet" name="qnamet" placeholder="ชื่อแบบประเมิน (อังกฤษ)" />
         </BoxRow>
     </Box>
 
